@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Estilo Astrolus</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq6Z2Mehe0Gv5nFO5m3QsghvE4qJQOiayELiEqsxjNRTaU5nP54rFOr5HQ1DF2ExwFzIkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Estilos CSS personalizados -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #1f2937;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #10b981;
+        }
+
+        .hero {
+            background: url('https://img.freepik.com/vector-gratis/fondo-conexion-red-degradado_23-2148874050.jpg?t=st=1727033371~exp=1727036971~hmac=98dae31b2f34ab9e8aafdee8a70792aefbf2896f33ea10537bb0529b6d12b464&w=1380') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+        }
+
+        .hero p {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background-color: #ecb100;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ffc400;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #10b981;
+        }
+
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer .social-icons {
+            margin-top: 1rem;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        footer .social-icons a:hover {
+            color: #ffae00;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header con navegación -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Surgepays domains</h1>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="http://localhost/djangoproject/domains.html">Domains</a></li>
+                <li><a href="http://localhost/djangoproject/certificates.html">Certificates</a></li>
+                <li><a href="http://127.0.0.1:8000/admin/">Login</a></li>
+                <li><a href="http://127.0.0.1:8000/api/v1/">Api Docs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Domains & Certificates</h1>
+            <p>Tu descripción moderna y atractiva va aquí.</p>
+            <a href="#" class="cta-button">Comenzar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Sección de características -->
+    <section>
+        <h2>Nuestras Características</h2>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Desarrollo Web</h3>
+                <p>Construimos sitios web modernos y optimizados para el rendimiento y la seguridad.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Responsive Design</h3>
+                <p>Nuestros diseños se adaptan perfectamente a cualquier tamaño de pantalla.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-lock"></i>
+                <h3>Seguridad Avanzada</h3>
+                <p>Mantenemos tus datos seguros con las últimas tecnologías de seguridad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>

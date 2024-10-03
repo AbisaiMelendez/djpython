@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHq6Z2Mehe0Gv5nFO5m3QsghvE4qJQOiayELiEqsxjNRTaU5nP54rFOr5HQ1DF2ExwFzIkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Tailwind CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos CSS personalizados -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      table {
+        width: 100%;
+        border-collapse: separate; /* Cambia de collapse a separate */
+        border-spacing: 0; /* Elimina el espacio entre celdas */
+        border-radius: 10px; /* Aplica el borde redondeado a la tabla */
+        overflow: hidden; /* Asegúrate de que los bordes se redondeen */
+        border: 1px solid black; /* Define el borde exterior de la tabla */
+      }
+      table,
+      th,
+      td {
+        border: 1px solid rgba(105, 91, 160, 0.259);
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      main {
+        flex: 1; /* Hace que el contenido principal ocupe todo el espacio restante */
+      }
+
+      header {
+        background-color: #1f2937;
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #10b981;
+      }
+
+      footer {
+        background-color: #1f2937;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0.5rem 0;
+      }
+
+      footer .social-icons {
+        margin-top: 1rem;
+      }
+
+      footer .social-icons a {
+        color: white;
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      footer .social-icons a:hover {
+        color: #10b981;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <!-- Header con navegación -->
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>Surgepays domains</h1>
+        </div>
+        <ul>
+          <li><a href="http://localhost/djangoproject/">Home</a></li>
+          <li>
+            <a href="http://localhost/djangoproject/domains.html">Domains</a>
+          </li>
+          <li><a href="#">Certificates</a></li>
+          <li><a href="http://127.0.0.1:8000/admin/">Login</a></li>
+          <li><a href="http://127.0.0.1:8000/api/v1/">Api Docs</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="p-4">
+      <h2 class="m-12 md-4">Tabla de Certificados</h2>
+      <table id="certificatesTable" class="min-w-full bg-gray-800 text-white">
+        <thead class="bg-gray-900">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Domain</th>
+            <th class="px-4 py-2">Certificate Type</th>
+            <th class="px-4 py-2">Subscription Period</th>
+            <th class="px-4 py-2">Certificate Issued</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="pagination mt-4" id="certificatesPagination"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 all rights reserved.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </footer>
+
+    <script>
+      const rowsPerPage = 5;
+
+      // Función para renderizar las tablas
+      function displayTable(data, tableId, paginationId) {
+        let currentPage = 1;
+        const tableBody = document.querySelector(`#${tableId} tbody`);
+        const pagination = document.getElementById(paginationId);
+
+        function renderTable(page) {
+          tableBody.innerHTML = "";
+          const start = (page - 1) * rowsPerPage;
+          const end = start + rowsPerPage;
+          const rows = data.slice(start, end);
+
+          rows.forEach((row) => {
+            const tr = document.createElement("tr");
+            for (const key in row) {
+              const td = document.createElement("td");
+              td.textContent = row[key];
+              td.classList.add("px-4", "py-2", "border");
+              tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+          });
+        }
+
+        function setupPagination() {
+          pagination.innerHTML = "";
+          const pageCount = Math.ceil(data.length / rowsPerPage);
+          for (let i = 1; i <= pageCount; i++) {
+            const button = document.createElement("button");
+            button.textContent = i;
+            button.classList.add(
+              "px-4",
+              "py-2",
+              "border",
+              "bg-gray-800",
+              "text-white",
+              "hover:bg-gray-600"
+            );
+            if (i === currentPage) {
+              button.classList.add("active");
+            }
+            button.addEventListener("click", () => {
+              currentPage = i;
+              renderTable(currentPage);
+              setupPagination();
+            });
+            pagination.appendChild(button);
+          }
+        }
+
+        renderTable(currentPage);
+        setupPagination();
+      }
+
+      // Cargar datos de certificados desde la nueva URL
+      fetch("http://127.0.0.1:8000/api/v1/certificates/")
+        .then((response) => response.json())
+        .then((data) =>
+          displayTable(data, "certificatesTable", "certificatesPagination")
+        );
+    </script>
+  </body>
+</html>
