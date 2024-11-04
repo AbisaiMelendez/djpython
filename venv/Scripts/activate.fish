@@ -58,7 +58,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV 'C:\xampp\htdocs\djangoProject\venv'
+set -gx VIRTUAL_ENV 'C:\xampp\htdocs\djpython\venv'
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | head -c 1) -lt 3
@@ -66,7 +66,7 @@ if test (echo $FISH_VERSION | head -c 1) -lt 3
 else
     set -gx _OLD_VIRTUAL_PATH $PATH
 end
-set -gx PATH "$VIRTUAL_ENV"'/Scripts' $PATH
+set -gx PATH "$VIRTUAL_ENV"'/'Scripts $PATH
 
 # Prompt override provided?
 # If not, just use the environment name.
